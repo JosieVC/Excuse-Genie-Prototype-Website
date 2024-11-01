@@ -33,9 +33,9 @@
     const generatorButton = document.getElementById('generatorButton');
     
     generatorButton.addEventListener('click',function(){
-      const randNum = Math.Floor(Math.random()*21);
-      let excuse = answers[randNum];
-      document.getElementById('gennedExcuse').innerText = excuse})
+      var randNum = Math.Floor(Math.random()*answers.length);
+      var excuse = answers[randNum];
+      document.getElementById('gennedExcuse').innerText = excuse.toString})
 
     
   </script>
