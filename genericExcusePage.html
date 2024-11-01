@@ -3,7 +3,7 @@
   <body>
     <h1>Generate an excuse:</h1>
     <button onclick = "display()">Click to Generate</button>
-    <p id = "gennedExcuse">...</p>
+    <p id = "gennedExcuse"></p>
   </body>
 
   <script>
@@ -30,7 +30,7 @@
       "Had car trouble—will explain when I get home."
     ];
     
-    const generatorButton = document.getElementById('generatorButton');
+    document.getElementById("generatorButton").addEventListener("click", display);
 
 
     function display(){
