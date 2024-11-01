@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <h1>Generate an excuse:</h1>
+    <button id = 'generatorButton'>Click to Generate</button>
+    <p id = "gennedExcuse">...</p>
+  </body>
 
+  <script>
+    const answers = [
+      "Got caught up with a work emergency.",
+      "Traffic is insane; I’ll have to take a rain check.",
+      "Not feeling 100% today, but let’s plan something soon!",
+      "My pet isn’t feeling well, need to stay close by.",
+      "Unexpected family thing just came up—next time for sure!",
+      "I thought the assignment was due next week.",
+      "My printer ran out of ink last night.",
+      "I emailed it, but maybe it didn’t go through?",
+      "Wi-Fi’s been acting up, couldn’t finish in time.",
+      "I had a doctor’s appointment that ran longer than expected.",
+      "Stuck in traffic, running a bit late.",
+      "I’m not feeling well, working from home if that’s okay.",
+      "Having some tech issues, should be back up soon.",
+      "Got an urgent call, had to step away for a moment.",
+      "Had to deal with an unexpected family matter.",
+      "Work ran late, so I’ll be home later than usual.",
+      "Lost track of time; sorry I missed dinner!",
+      "I need to stay late for a project deadline.",
+      "Feeling under the weather; maybe tomorrow?",
+      "Had car trouble—will explain when I get home."
+    ];
+    
+    const generatorButton = document.getElementById('generatorButton');
+    
+    generatorButton.addEventListener('click',function(){
+      const randNum = Math.Floor(Math.random()*21);
+      let excuse = answers[randNum];
+      document.getElementById('gennedExcuse').innerText = excuse})
+
+    
+  </script>
