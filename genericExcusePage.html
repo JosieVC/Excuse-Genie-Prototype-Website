@@ -2,7 +2,7 @@
 <html lang="en">
   <body>
     <h1>Generate an excuse:</h1>
-    <button id = 'generatorButton'>Click to Generate</button>
+    <button onclick = "display()">Click to Generate</button>
     <p id = "gennedExcuse">...</p>
   </body>
 
@@ -31,11 +31,13 @@
     ];
     
     const generatorButton = document.getElementById('generatorButton');
-    
-    generatorButton.addEventListener('click',function(){
+
+
+    function display(){
       var randNum = Math.Floor(Math.random()*answers.length);
       var excuse = answers[randNum];
-      document.getElementById('gennedExcuse').innerText = excuse.toString})
+      document.getElementById('gennedExcuse').innerHTML = excuse.toString 
+    }
 
     
   </script>
