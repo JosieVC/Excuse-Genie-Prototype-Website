@@ -1,28 +1,150 @@
 <!DOCTYPE html>
-<html lang = "en">
-  <head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <style>
-      .button {
-        background-color: #008080;
-        border: 2px solid black;
-        color: green; 
-        padding: 5px 10px;
-        text-align: center;
-        display: inline-block;
-        font-size: 20px;
-        margin: 10px 30px;
-        cursor: pointer; 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excuse Genie</title>
+
+  <style>
+    /* Align all elements in the middle, scalable for many screen sizes */
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #7fdf7f;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    img.logo
+    {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 5.0em;
+      margin-bottom: 20px;
+      color: #0f1010;
+      animation: bounce 1s ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
       }
-    </style>
-    <title>Excuse Genie</title>
-  </head>
-  <body>
-    <a href = 'genericExcusePage.html'>
-      <button id = "mainButton">
-        Generic Excuses
-      </button>
-    </a>
-  </body>
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+
+    p {
+      font-size: 2.0em;
+      color: #000000;
+      margin: 0 0 30px 0;
+      background-color: rgba(184, 244, 49, 0.9);
+      padding: 10px;
+      border-radius: 8px;
+      display: inline-block; /* Keep this to maintain the width based on content */
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      line-height: 1;
+      width: fit-content; /* Set width to fit the content */
+      font-weight: bold; /* Make text bold */
+    }
+
+
+    .buttonStyle {
+      background-color: #30f638;
+      border: 2px solid #041e02;
+      color: black;
+      padding: 10px 20px;
+      font-size: 1.5em;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.3s;
+      margin: 10px;
+      width: 100%; /* Set buttons to take the full width of the p element */
+      max-width: 400px; /* Optional: Set a maximum width for buttons */
+      display: block; /* Change display to block for full width */
+    }
+
+    .buttonStyle:hover {
+      background-color: #027c1d;
+      transform: scale(1.05);
+    }
+
+    #gennedExcuse {
+      margin-top: 40px;
+      font-size: 2.0em;
+      color: #0f1010;
+    }
+  </style>
+</head>
+
+<body>
+
+
+<!-- Logo -->
+<img class="logo" src = "https://github.com/JosieVC/Excuse-Genie-Prototype-Website/blob/main/excuseGenieIcon.png">
+<h1>Excuse Genie</h1>
+<p>What excuse do you need today?</p>
+
+<!-- Buttons for each topic -->
+<button class="buttonStyle" onclick="generateExcuse('social')">Social</button>
+<button class="buttonStyle" onclick="generateExcuse('school')">School</button>
+<button class="buttonStyle" onclick="generateExcuse('work')">Work</button>
+<button class="buttonStyle" onclick="generateExcuse('family')">Family</button>
+
+<p id="gennedExcuse"></p>
+
+<script>
+  // Divided based on topics
+  const answers = {
+    social: [
+      "Got caught up with a work emergency.",
+      "Traffic is insane; I’ll have to take a rain check.",
+      "Not feeling 100% today, but let’s plan something soon!",
+      "My pet isn’t feeling well, need to stay close by.",
+      "Unexpected family thing just came up—next time for sure!"
+    ],
+    school: [
+      "I thought the assignment was due next week.",
+      "My printer ran out of ink last night.",
+      "I emailed it, but maybe it didn’t go through?",
+      "Wi-Fi’s been acting up, couldn’t finish in time.",
+      "I had a doctor’s appointment that ran longer than expected."
+    ],
+    work: [
+      "Stuck in traffic, running a bit late.",
+      "I’m not feeling well, working from home if that’s okay.",
+      "Having some tech issues, should be back up soon.",
+      "Got an urgent call, had to step away for a moment.",
+      "Had to deal with an unexpected family matter."
+    ],
+    family: [
+      "Work ran late, so I’ll be home later than usual.",
+      "Lost track of time; sorry I missed dinner!",
+      "I need to stay late for a project deadline.",
+      "Feeling under the weather; maybe tomorrow?",
+      "Had car trouble—will explain when I get home."
+    ]
+  };
+
+  function generateExcuse(topic) {
+    // Get excuse based on topic:
+    const randomExcuse = answers[topic][Math.floor(Math.random() * answers[topic].length)];
+
+    // Display:
+    document.getElementById('gennedExcuse').textContent = randomExcuse;
+  }
+</script>
+</body>
 </html>

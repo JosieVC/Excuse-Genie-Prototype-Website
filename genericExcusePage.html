@@ -1,43 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excuse Generator</title>
+</head>
+
   <body>
     <h1>Generate an excuse:</h1>
-    <button type = "generatorButton" onclick = "display()">Click to Generate</button>
-    <p id = "gennedExcuse"></p>
-  </body>
 
-  <script>
-    const answers = [
+    <!-- Buttons for each topic -->
+    <button onclick="generateExcuse('social')">Social</button>
+    <button onclick="generateExcuse('school')">School</button>
+    <button onclick="generateExcuse('work')">Work</button>
+    <button onclick="generateExcuse('family')">Family</button>
+
+    <p id="gennedExcuse"></p>
+
+
+    <script>
+    //Divided base on topics
+    const answers = {
+      social: [
       "Got caught up with a work emergency.",
       "Traffic is insane; I’ll have to take a rain check.",
       "Not feeling 100% today, but let’s plan something soon!",
       "My pet isn’t feeling well, need to stay close by.",
-      "Unexpected family thing just came up—next time for sure!",
+      "Unexpected family thing just came up—next time for sure!"
+    ],
+            school: [
       "I thought the assignment was due next week.",
       "My printer ran out of ink last night.",
       "I emailed it, but maybe it didn’t go through?",
       "Wi-Fi’s been acting up, couldn’t finish in time.",
-      "I had a doctor’s appointment that ran longer than expected.",
+      "I had a doctor’s appointment that ran longer than expected."
+    ],
+            work: [
       "Stuck in traffic, running a bit late.",
       "I’m not feeling well, working from home if that’s okay.",
       "Having some tech issues, should be back up soon.",
       "Got an urgent call, had to step away for a moment.",
-      "Had to deal with an unexpected family matter.",
+      "Had to deal with an unexpected family matter."
+    ],
+            family:
+                    [
       "Work ran late, so I’ll be home later than usual.",
       "Lost track of time; sorry I missed dinner!",
       "I need to stay late for a project deadline.",
       "Feeling under the weather; maybe tomorrow?",
-      "Had car trouble—will explain when I get home."
-    ];
-    
-    document.getElementById("generatorButton").addEventListener("click", display);
+      "Had car trouble—will explain when I get home.",
+                    ]
 
+    };
 
-    function display(){
-      var randNum = Math.Floor(Math.random()*answers.length);
-      var excuse = answers[randNum];
-      document.getElementById('gennedExcuse').innerHTML = excuse.toString;
+    //Old version:
+    // document.getElementById("generatorButton").addEventListener("click", display);
+    // function display(){
+    //   var randNum = Math.Floor(Math.random()*answers.length);
+    //   var excuse = answers[randNum];
+    //   document.getElementById('gennedExcuse').innerHTML = excuse.toString;
+    // }
+
+    function generateExcuse(topic)
+    {
+      //Get excuse base on topic:
+      const randomExcuse = answers[topic][Math.floor(Math.random() * answers[topic].length)];
+
+      //Display:
+      document.getElementById('gennedExcuse').textContent = randomExcuse;
     }
-
-    
   </script>
+  </body>
+</html>
