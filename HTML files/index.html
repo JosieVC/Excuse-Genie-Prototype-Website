@@ -65,22 +65,27 @@
 
 
     .buttonStyle {
-      background-image: url("https://raw.githubusercontent.com/JosieVC/Excuse-Genie-Prototype-Website/main/Images/textlessbutton.png");
-      background-size: cover;
-      background-position: center center; /* Centers the image */
-      background-repeat: no-repeat;
-      background-color: transparent;
+      background-color: #bcec5c;
+      border: 2px solid #100000;
+      color: black;
+      padding: 10px 20px;
+      font-size: 1.5em;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.3s;
+      margin: 10px;
+      width: 100%;
       max-width: 400px;
-      min-height: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
+      display: block;
+      position: relative;
+      z-index: 1;
     }
 
 
     .buttonStyle:hover {
-      background-color: #1b712c;
+      background-color: #85b807;
       transform: scale(1.05);
     }
 
