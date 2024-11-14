@@ -6,33 +6,32 @@
   <title>Excuse Genie</title>
 
   <style>
-    /* Align all elements in the middle, scalable for many screen sizes */
     body {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
       text-align: center;
-
+      padding-top: 10px;
 
       background-image: url("https://raw.githubusercontent.com/JosieVC/Excuse-Genie-Prototype-Website/90a12133d5b0d6d56916d9b4a9960d3e276b9e50/Images/Excuse%20Genie%20background.png ");
-      background-size: cover; /* Ensures the image covers the entire background */
-      background-position: center center; /* Centers the image */
-      background-repeat: no-repeat; /* Prevents the image from repeating */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    img.logo
-    {
+    img.logo {
       max-width: 400px;
-      margin-bottom: 10px;
+      max-height: 200px;
+      margin-bottom: 0px;
     }
 
     h1 {
       font-size: 5.0em;
-      margin-bottom: 20px;
+      margin-bottom: 5px;
       color: #0f1010;
       animation: bounce 1s ease-in-out;
     }
@@ -52,7 +51,7 @@
     p {
       font-size: 2.0em;
       color: #000000;
-      margin: 0 0 30px 0;
+      margin: 0 0 10px 0;
       background-color: rgba(184, 244, 49, 0.9);
       padding: 10px;
       border-radius: 8px;
@@ -63,8 +62,11 @@
       font-weight: bold;
     }
 
-
     .buttonStyle {
+      width: 100%;
+      width: 400px;
+      margin-bottom: 15px;
+      max-width: 400px;
       background-color: #bcec5c;
       border: 2px solid #100000;
       color: black;
@@ -75,25 +77,62 @@
       cursor: pointer;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
       transition: background-color 0.3s, transform 0.3s;
-      margin: 10px;
-      width: 100%;
-      max-width: 400px;
       display: block;
-      position: relative;
-      z-index: 1;
     }
-
 
     .buttonStyle:hover {
       background-color: #85b807;
       transform: scale(1.05);
     }
 
+    #excuseContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
     #gennedExcuse {
-      margin-top: 40px;
+      margin-top: 5px;
       font-size: 2.0em;
       color: #0f1010;
     }
+
+    #successMessage {
+      display: none;
+      color: green;
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .buttons-wrapper {
+      display: flex;
+      justify-content: flex-start; /* Align all buttons to the left */
+      gap: 20px;
+      margin-top: 20px;
+      align-items: center;
+    }
+
+    .image-buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .image-buttons img {
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .image-buttons img:hover {
+      transform: scale(1.1);
+    }
+
   </style>
 </head>
 
@@ -104,59 +143,157 @@
 <h1>Excuse Genie</h1>
 <p>What excuse do you need today?</p>
 
-<!-- Buttons for each topic -->
-<button class="buttonStyle" onclick="generateExcuse('social')">Social</button>
-<button class="buttonStyle" onclick="generateExcuse('school')">School</button>
-<button class="buttonStyle" onclick="generateExcuse('work')">Work</button>
-<button class="buttonStyle" onclick="generateExcuse('family')">Family</button>
-
-<p id="gennedExcuse"></p>
-
 <script>
-  // Divided based on topics
-  //changed answers to be more in line with survey results
   const answers = {
-    social: [
-      "Got caught up with a work emergency.",
-      "Traffic is insane; I’ll have to take a rain check.",
-      "Not feeling 100% today, but let’s plan something soon!",
-      "My pet isn’t feeling well, need to stay close by.",
-      "Unexpected family thing just came up—next time for sure!"
-      "Oh sorry, I won't be able to make it today, I accidentally committed arson and am now running from the police."
-    ],
-    school: [
-      "I thought the assignment was due next week.",
-      "My printer ran out of ink last night.",
-      "I emailed it, but maybe it didn’t go through?",
-      "Wi-Fi’s been acting up, couldn’t finish in time.",
-      "I've been having some major medical issues and couldn't work on my assignment."
-      "Did you not get the bomb threat I sent in? School was supposed to be cancelled today."
-    ],
-    work: [
-      "My car broke down, I can't make it in today. I'm taking it to the mechanic right now, so hopefully no further issues will occur.",
-       "I’m not feeling well, I'll have to take a sick day. I'm too sick to travel to the doctor for a note, but I'll keep in touch if the issue worsens.",
-      "Having some tech issues, won't be able to log on today. I think it's something with my computer itself, I'm going to take it to the store and see what the problem is.",
-      "Got an urgent call, my house got flooded by a busted pipe - I need to try to recover the damage.",
-      "Had to deal with an unexpected family matter, one of my cousins is in the hospital and I need to be there to help with medical records."
-      "One of our competitors uncovered some unfortunate truths about our business dealings. I'm in the process of taking them down right now - my sniper rifle is trained. I'll be back tomorrow once my job is finished."
-    ],
-    family: [
-      "Work ran late, so I’ll be home later than usual.",
-      "Lost track of time; sorry I missed dinner!",
-      "I need to stay late for a project deadline.",
-      "Feeling under the weather; maybe tomorrow?",
-      "Had car trouble—will explain when I get home."
-      "Oh, sorry, there was a major miscommunication - I thought I had scheduled in spending time with my OTHER family. I'll be back tomorrow."
-    ]
+    social: {
+      relationship: [
+        "Sorry, but I’m planning something special...",
+        "My parents are being super annoying...",
+        "Aaahh, I totally lost track of time...",
+        "I’ve been having some health problems...",
+        "So sorry I couldn’t make it, I was busy cheating..."
+      ],
+      friend: [
+        "Got caught up with a work emergency.",
+        "Traffic is insane; I’ll have to take a rain check.",
+        "Not feeling 100% today, but let’s plan something soon!",
+        "My pet isn’t feeling well, need to stay close by.",
+        "Unexpected family things just came up...",
+        "Oh sorry, I won't be able to make it today..."
+      ]
+    },
+    work: {
+      absence: [
+        "My car broke down, I can't make it in today...",
+        "I’m not feeling well, I'll have to take a sick day...",
+        "Having some tech issues, I won't be able to log on...",
+        "Got an urgent call, my house got flooded...",
+        "Had to deal with an unexpected family matter...",
+        "One of our competitors uncovered some unfortunate truths..."
+      ],
+      lateWork: [
+        "I’ve been having some major tech problems...",
+        "I was supposed to get some files from [coworker’s name here]...",
+        "I emailed that to you yesterday...",
+        "I’ve been having some trouble communicating...",
+        "I’ve been finishing fudging the numbers...",
+      ]
+    },
+    school: {
+      absence: [
+        "I’ve been super sick and couldn’t come in today...",
+        "There was a family emergency...",
+        "My computer broke down...",
+        "My pet went missing this morning...",
+        "Did you not get the bomb threat I sent in?"
+      ],
+      lateWork: [
+        "I thought the assignment was due next week.",
+        "My printer ran out of ink last night.",
+        "I emailed it, but maybe it didn’t go through?",
+        "Wi-Fi’s been acting up...",
+        "I've been having some major medical issues...",
+        "My dog ate my homework..."
+      ]
+    },
+    family: {
+      familyEvent: [
+        "Work ran late, so I’ll be home later...",
+        "Lost track of time; sorry I missed dinner!",
+        "I need to stay late for a project deadline.",
+        "Feeling under the weather; maybe tomorrow?",
+        "Had car trouble...",
+        "Oh, sorry, there was a major miscommunication..."
+      ],
+      familyDrama: [
+        "I’m actually helping my mom work through some things...",
+        "I don’t want to ruin any relationships...",
+        "I never agreed to do anything...",
+        "Things have been so tense lately...",
+        "Yeah, well maybe if [insert family member name here]..."
+      ]
+    }
   };
 
-  function generateExcuse(topic) {
-    // Get excuse based on topic:
-    const randomExcuse = answers[topic][Math.floor(Math.random() * answers[topic].length)];
+  function showSubButtons(mainCategory) {
+    document.getElementById('main-buttons').classList.add('hidden');
+    document.getElementById('sub-buttons').classList.remove('hidden');
+    const subButtonsContainer = document.getElementById('sub-buttons');
+    subButtonsContainer.innerHTML = '';
+    Object.keys(answers[mainCategory]).forEach(subCategory => {
+      const button = document.createElement('button');
+      button.className = 'buttonStyle';
+      button.textContent = subCategory.replace(/([A-Z])/g, ' $1').trim().replace(/^./, match => match.toUpperCase());
+      button.onclick = () => generateExcuse(mainCategory, subCategory);
+      subButtonsContainer.appendChild(button);
+    });
+    const backButton = document.createElement('button');
+    backButton.className = 'buttonStyle';
+    backButton.textContent = 'Back';
+    backButton.onclick = backToMain;
+    subButtonsContainer.appendChild(backButton);
+  }
 
-    // Display:
+  function backToMain() {
+    document.getElementById('main-buttons').classList.remove('hidden');
+    document.getElementById('sub-buttons').classList.add('hidden');
+  }
+
+  let lastExcuse = "";
+
+  function generateExcuse(mainCategory, subCategory) {
+    const excuses = answers[mainCategory][subCategory];
+    let randomExcuse;
+    do {
+      randomExcuse = excuses[Math.floor(Math.random() * excuses.length)];
+    } while (randomExcuse === lastExcuse && excuses.length > 1);
+
     document.getElementById('gennedExcuse').textContent = randomExcuse;
+    lastExcuse = randomExcuse;
+    document.getElementById('saveButton').style.display = "block";
+    document.getElementById('shareButton').style.display = "block";
+    document.getElementById('successMessage').style.display = "none";
+  }
+
+  function SaveButton() {
+    const excuse = document.getElementById('gennedExcuse').textContent;
+    localStorage.setItem('savedExcuse', excuse);
+    document.getElementById('successMessage').textContent = "Your excuse has been saved successfully!";
+    document.getElementById('successMessage').style.display = "block";
+  }
+
+  function ShareButton() {
+    const excuse = document.getElementById('gennedExcuse').textContent;
+    document.getElementById('successMessage').textContent = "Your excuse has been shared successfully!";
+    document.getElementById('successMessage').style.display = "block";
   }
 </script>
+
+<div id="excuseContainer">
+  <!-- Main Buttons -->
+  <div id="main-buttons">
+    <button class="buttonStyle" onclick="showSubButtons('social')">Social</button>
+    <button class="buttonStyle" onclick="showSubButtons('school')">School</button>
+    <button class="buttonStyle" onclick="showSubButtons('work')">Work</button>
+    <button class="buttonStyle" onclick="showSubButtons('family')">Family</button>
+  </div>
+
+  <div id="sub-buttons" class="hidden"></div>
+
+  <!-- Buttons Container for Main Buttons + Image Buttons (Save & Share) -->
+  <div class="buttons-wrapper">
+    <!-- Main buttons already displayed above -->
+    <div class="image-buttons">
+      <img src="https://raw.githubusercontent.com/JosieVC/Excuse-Genie-Prototype-Website/main/Images/genieSaveButton.png" alt="Save" id="saveButton" onclick="SaveButton()" style="display: none;">
+      <img src="https://raw.githubusercontent.com/JosieVC/Excuse-Genie-Prototype-Website/main/Images/genieShareButton.png" alt="Share" id="shareButton" onclick="ShareButton()" style="display: none;">
+    </div>
+  </div>
+
+  <!-- Success Message -->
+  <p id="successMessage" style="display: none;"></p>
+
+  <!-- Display the Generated Excuse -->
+  <p id="gennedExcuse"></p>
+</div>
 </body>
 </html>
